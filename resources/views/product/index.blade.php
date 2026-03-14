@@ -16,7 +16,7 @@
   <div class="header">
     <div class="title-wrap">
       <h1>Product List</h1>
-      <span class="subtitle">Inventory Management</span>
+      {{-- <span class="subtitle">Inventory Management</span> --}}
     </div>
     <a href="/create" class="add-btn">
       <span style="font-size:1.1rem;position:relative;z-index:1">+</span>
