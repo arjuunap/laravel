@@ -1,19 +1,17 @@
 <?php
 
-use App\Http\Controllers\MyappController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {return view('welcome');});
-Route::get("/", [MyappController::class,"sample"])->name("index");
 
+Route::get("/",[ProductController::class,'index'])->name('home');
 
-// Route::get("/home/{name}",function($name){
-//     return "Student Name : " . $name;
-// });
+Route::get('/create',[ProductController::class,'create']);
 
+Route::post("/",[ProductController::class,'store']);
 
-Route::get("/about",[MyappController::class,"about"])->name("about");
-Route::get("/contact",[MyappController::class,"contact"])->name("contact");
-Route::get("/product/{id}",[MyappController::class,"product"])->name("product");
-
+Route::get("/delete/{id}", [ProductController::class,'delete'])->name('delete');
+Route::get("/edit/{id}",[ProductController::class,'edit'])->name('edit');
+Route::post("/update/{id}",[ProductController::class,'update'])->name('update');
+Route::get("/details/{id}",[ProductController::class,'details'])->name('details');
 

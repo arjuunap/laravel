@@ -1,0 +1,313 @@
+/* ── Reset ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ── Body ── */
+body {
+    background: #0a0a0f;
+    color: #e2e2f0;
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    padding: 2.5rem 2rem;
+    overflow-x: hidden;
+}
+
+/* Animated background grid */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(99, 102, 241, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 102, 241, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: gridMove 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes gridMove {
+    0%   { transform: translate(0, 0); }
+    100% { transform: translate(40px, 40px); }
+}
+
+/* ── Container ── */
+.container {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Back Link ── */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #818cf8;
+}
+
+/* ── Page Header ── */
+.page-header {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 40%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.page-subtitle {
+    font-size: 0.78rem;
+    color: #6b7280;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    margin-top: 4px;
+}
+
+/* ── Card ── */
+.card {
+    background: #0e0e1a;
+    border: 1px solid #1e1e2e;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #6366f1, #c084fc, transparent);
+}
+
+/* ── Two-Column Layout ── */
+.card-body {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+}
+
+/* ── Image Panel ── */
+.image-panel {
+    background: #13131f;
+    border-right: 1px solid #1e1e2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    gap: 1rem;
+}
+
+.image-frame {
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    border: 1px solid #2d2d4e;
+    overflow: hidden;
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.image-label {
+    font-size: 0.7rem;
+    color: #4b5563;
+    font-family: 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ── Fields Panel ── */
+.fields-panel {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+/* ── Field Groups ── */
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: rowIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.field-group:nth-child(1) { animation-delay: 0.2s; }
+.field-group:nth-child(2) { animation-delay: 0.28s; }
+.field-group:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes rowIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.field-label {
+    font-size: 0.68rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: 'DM Mono', monospace;
+}
+
+.field-value {
+    font-size: 0.95rem;
+    color: #e2e2f0;
+    font-weight: 600;
+    background: #13131f;
+    border: 1px solid #1e1e2e;
+    border-radius: 10px;
+    padding: 10px 14px;
+    width: 100%;
+}
+
+.field-value.price {
+    color: #34d399;
+    font-family: 'DM Mono', monospace;
+}
+
+.field-value.description {
+    color: #a0a0b8;
+    font-weight: 400;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    min-height: 80px;
+}
+
+/* ── Card Footer ── */
+.card-footer {
+    border-top: 1px solid #1e1e2e;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0a0a12;
+}
+
+/* ── Badge ── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    color: #34d399;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #34d399;
+    animation: pulse 2s infinite;
+}
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.8rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #818cf8;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+}
+
+/* ── Footer Action Buttons ── */
+.footer-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.18s ease;
+    border: 1px solid transparent;
+}
+
+/* Edit */
+.btn-edit {
+    background: rgba(251, 191, 36, 0.08);
+    color: #fbbf24;
+    border-color: rgba(251, 191, 36, 0.2);
+}
+
+.btn-edit:hover {
+    background: rgba(251, 191, 36, 0.15);
+    border-color: rgba(251, 191, 36, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Delete */
+.btn-delete {
+    background: rgba(239, 68, 68, 0.08);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.15);
+}
+
+.btn-delete:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.35);
+    transform: translateY(-1px);
+}
