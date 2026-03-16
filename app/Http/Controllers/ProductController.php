@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -8,7 +10,7 @@ class ProductController extends Controller
 {
     //
     public function index(){
-        $products = Product::all();
+        $products = Product::paginate(5);
         return view("product.index",compact('products'));
     }
 
@@ -89,5 +91,25 @@ class ProductController extends Controller
 
     }
 
+    public function search(Request $request){
+        
+        $products = Product::where('name','LIKE','%'.$request->search.'%')->get();
+        // return view('product.index',compact('products'));
+
+        if ($request->ajax()){
+            return response()->json($products);
+        }
+        return view('product.index',compact('products'));
+    }
+
+
+    public function downloadPDF()
+    {
+        $products = Product::all();
+
+        $pdf = Pdf::loadView('product.pdf', compact('products'));
+
+        return $pdf->download('product.pdf');
+    }
     
 }
